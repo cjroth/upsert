@@ -16,10 +16,10 @@ function upsertInner(db, docId, diffFun) {
       throw err;
     }
     return {};
-  }).then(function (doc) {
+}).then(async (doc) => {
     // the user might change the _rev, so save it for posterity
     var docRev = doc._rev;
-    var newDoc = diffFun(doc);
+    var newDoc = await diffFun(doc);
 
     if (!newDoc) {
       // if the diffFun returns falsy, we short-circuit as
